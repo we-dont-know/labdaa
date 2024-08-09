@@ -1,76 +1,70 @@
 // topological sort
 
- #include <stdio.h> 
-#include <stdbool.h> 
-#define MAX_NODES 100 
-typedef struct Node  
-{ 
-} Node; 
-int id; 
-int dependencies[MAX_NODES]; 
-int numDependencies; 
-bool visited; 
-Node nodes[MAX_NODES]; 
-int numNodes; 
-void initializeNodes()  
-{ 
-int i; 
-for (i = 0; i < MAX_NODES; i++)  
-{ 
-  nodes[i].id = i; 
-  nodes[i].numDependencies = 0; 
-  nodes[i].visited = false; 
-  } 
- numNodes = 0; 
-} 
-void addDependency(int from, int to) 
-{ 
- nodes[to].dependencies[nodes[to].numDependencies] = from; 
- nodes[to].numDependencies++; 
-} 
-void topologicalSort()  
-{ 
- int i, j; 
- int numVisited = 0; 
- bool noDependencies; 
-while (numVisited < numNodes)  
-{ 
-  noDependencies = true; 
-  for (i = 0; i < numNodes; i++)  
-{ 
-   if (!nodes[i].visited)  
-{ 
-   for (j = 0; j < nodes[i].numDependencies; j++)  
-{ 
-    if (!nodes[nodes[i].dependencies[j]].visited) 
-{ 
-     noDependencies = false; 
-     break; 
-    } 
-   } 
-   if (noDependencies)  
-{ 
-    printf("%d ", nodes[i].id); 
-    nodes[i].visited = true; 
-    numVisited++; 
-    break; 
-    } 
-   } 
-  } 
- } 
-} 
+  #include<stdio.h>
+ #include<stdbool.h>
+ #define maxnode 100
+ typedef struct node{
+ int id;
+ int d[maxnode];
+ int nd;
+ bool visited;
+ }node;
+ node nodes[maxnode];
+ int numnodes;
+ void initialize()
+ {
+ for(int i=0;i<numnodes;i++)
+ {
+ nodes[i].id=i;
+ nodes[i].nd=0;
+ nodes[i].visited=false;
+ }
+ }
+ void adddependency(int from ,int to)
+ {
+ nodes[to].d[nodes[to].nd++]=from;
+ }
+ void topologicalsort()
+ {
+ int numvisited=0;
+ while(numvisited<numnodes)
+ {
+ for(int i=0;i<numnodes;i++)
+ {
+ }
+ }
+ }
+ int main()
+ {
+ numnodes=7;
+ initialize();
+ if(!nodes[i].visited)
+ {
+ bool unvisited=false;
+ for(int j=0;j<nodes[i].nd;j++)
+ {
+ if(!nodes[nodes[i].d[j]].visited)
+ {
+ unvisited=true;
+ break;
+ }
+ }
+ if(!unvisited)
+ {
+ printf("%d\t",nodes[i].id);
+ numvisited++;
+ nodes[i].visited=true;
+ }
+ }
+ adddependency(1,3);
+ adddependency(2,3);
+ adddependency(3,4);
+ adddependency(3,5);
+ adddependency(4,6);
+ adddependency(5,6);
+ printf("topologicalsort\n");
+ topologicalsort();
+ printf("\n");
+ return 0;
+ }
  
-int main()  
-{ 
- initializeNodes(); 
-addDependency(1, 3); 
- addDependency(2, 3); 
- addDependency(3, 4); 
- addDependency(3, 5); 
- addDependency(4, 6); 
- addDependency(5, 6); 
-numNodes = 7;  
-printf("Topological Order: "); 
- topologicalSort(); 
-return 0; 
-}
